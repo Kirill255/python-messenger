@@ -11,7 +11,12 @@ def hello():
 
 @app.route("/status")
 def status():
-    return {"status": "ok", "time": datetime.now()}
+    return {
+        "status": True,
+        # "time": datetime.now()
+        # "time": str(datetime.now())
+        "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    }
 
 
 if __name__ == "__main__":
