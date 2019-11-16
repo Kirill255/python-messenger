@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 from datetime import datetime
 import time
 
@@ -11,7 +11,7 @@ messages = [
 
 @app.route("/")
 def hello_view():
-    return "Hello, World!"
+    return "Hello, World! This is a messenger!"
 
 
 @app.route("/status")
@@ -27,6 +27,23 @@ def status_view():
 @app.route("/messages")
 def messages_view():
     return {"messages": messages}
+
+
+@app.route("/send", methods=["POST"])
+def send_view():
+    """
+    Отправить сообщение всем
+    input: {"username": str, "text": str}
+    :return: {"status": bool}
+    """
+    print(request.json)
+    username = request.json["username"]
+    text = request.json["text"]
+
+    # messages.insert(0, {"username": username, "time": time.time(), "text": text})
+    messages.append({"username": username, "time": time.time(), "text": text})
+
+    return {"status": True}
 
 
 if __name__ == "__main__":
