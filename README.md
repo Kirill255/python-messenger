@@ -41,6 +41,12 @@ Flask может сам преобразовывать дату в красив�
 
 `три ковычки " или ' + enter` - python docstring https://www.python.org/dev/peps/pep-0257/
 
+## requests
+
+[send POST with headers](https://stackoverflow.com/questions/10768522/python-send-post-with-header)
+
+[json parameter](https://requests.kennethreitz.org/en/master/user/quickstart/#more-complicated-post-requests)
+
 ## Other
 
 [datetime and time](https://python-scripts.com/datetime-time-python)
