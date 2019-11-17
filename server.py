@@ -56,5 +56,26 @@ def send_view():
     return {"status": True}
 
 
+@app.route("/login", methods=["POST"])
+def login_view():
+    """
+    Логиним пользователя в системе
+    input: {"username": str, "password": str}
+    :return: {"status": bool}
+    """
+    print(request.json)
+    username = request.json["username"]
+    password = request.json["password"]
+
+    # если нет пользователя
+    if username not in users:
+        users[username] = password  # то записываем нового пользователя
+        return {"status": True}
+    elif users[username] == password:  # если есть пользователь, то сверяем пароль
+        return {"status": True}
+    else:
+        return {"status": False}
+
+
 if __name__ == "__main__":
     app.run()
