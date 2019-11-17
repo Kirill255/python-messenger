@@ -31,7 +31,13 @@ def status_view():
 
 @app.route("/messages")
 def messages_view():
-    return {"messages": messages}
+    print(request.args)
+    after = float(request.args["after"])  # приводим обратно к флоату, т.к. в get параметре пришла строка
+    filtered_messages = []
+    for message in messages:
+        if message["time"] > after:
+            filtered_messages.append(message)
+    return {"messages": filtered_messages}
 
 
 @app.route("/send", methods=["POST"])
