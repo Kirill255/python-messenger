@@ -7,6 +7,11 @@ messages = [
     {"username": "Jack", "time": time.time(), "text": "Hello"},
     {"username": "Jane", "time": time.time(), "text": "Hi, Jack"},
 ]
+# что-то вроде хранилища паролей, где ключ это username, а значение какой-то пароль
+users = {
+    "Jack": "123",
+    "Jane": "321"
+}
 
 
 @app.route("/")
@@ -33,12 +38,17 @@ def messages_view():
 def send_view():
     """
     Отправить сообщение всем
-    input: {"username": str, "text": str}
+    input: {"username": str, "text": str, "password": str}
     :return: {"status": bool}
     """
     print(request.json)
     username = request.json["username"]
     text = request.json["text"]
+    password = request.json["password"]
+
+    # если нет пользователя или неверный пароль
+    if username not in users or users[username] != password:
+        return {"status": False}
 
     # messages.insert(0, {"username": username, "time": time.time(), "text": text})
     messages.append({"username": username, "time": time.time(), "text": text})
